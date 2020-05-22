@@ -10,55 +10,7 @@ import Foundation
 import subtitle
 
 public struct SRT {
-    private var _segments = [Segment]()
-}
-
-extension SRT {
-    /// Initialize a srt with its content.
-    ///
-    /// - Parameter content: content of a srt file.
-    public init(content: String) {
-        /// Indicating what the next piece of information is
-        enum ParsingState { case index, time, content }
-
-        let lineSeparator: String
-        if content.contains("\r\n") {
-            lineSeparator = "\r\n"
-        } else if content.contains("\r") {
-            lineSeparator = "\r"
-        } else {
-            lineSeparator = "\n"
-        }
-
-        for part in content.components(separatedBy: "\(lineSeparator)\(lineSeparator)").lazy {
-            var state = ParsingState.index
-            var index: Int? = nil
-            var time: String? = nil
-            var content = [String]()
-            for line in part.components(separatedBy: lineSeparator) {
-                let line = line.trimmingCharacters(in: .whitespacesAndNewlines)
-                switch state {
-                case .index:
-                    if let i = Int(line) {
-                        index = i
-                        state = .time
-                    }
-                case .time:
-                    if line.contains("-->") {
-                        time = line
-                        state = .content
-                    }
-                case .content:
-                    if line.count > 0 {
-                        content.append(line)
-                    }
-                }
-            }
-            if let i = index, let t = time, content.count > 0 {
-                _segments.append(Segment(index: i, time: t, contents: content))
-            }
-        }
-    }
+    internal var _segments = [Segment]()
 }
 
 extension SRT: Subtitle {

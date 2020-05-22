@@ -13,6 +13,7 @@ import Rainbow
 import subtitle
 import bcc
 import srt
+import vtt
 
 enum ConversionError: Swift.Error, LocalizedError {
     case unknownFileFormat
@@ -64,6 +65,8 @@ fileprivate func fileFormat(
             return BCC.self
         } else if path.hasSuffix(".srt") {
             return SRT.self
+        } else if path.hasSuffix(".vtt") {
+            return VTT.self
         } else {
             throw ConversionError.unknownFileFormat
         }
@@ -71,6 +74,8 @@ fileprivate func fileFormat(
         return BCC.self
     case .srt:
         return SRT.self
+    case .vtt:
+        return VTT.self
     }
 }
 

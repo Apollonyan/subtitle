@@ -15,13 +15,15 @@ enum SubtitleFileFormat: ExpressibleByArgument {
             self = .srt
         case "bcc":
             self = .bcc
+        case "vtt":
+            self = .vtt
         default:
             self = .detectFromFileName
         }
     }
 
     case detectFromFileName
-    case srt, bcc
+    case srt, bcc, vtt
 
     var defaultValueDescription: String {
         switch self {
@@ -31,6 +33,8 @@ enum SubtitleFileFormat: ExpressibleByArgument {
             return "bcc"
         case .srt:
             return "srt"
+        case .vtt:
+            return "vtt"
         }
     }
 }

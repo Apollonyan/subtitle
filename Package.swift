@@ -5,6 +5,9 @@ import PackageDescription
 let package = Package(
     name: "subtitle",
     products: [
+        .executable(
+            name: "convert",
+            targets: ["convert"]),
         .library(
             name: "subtitle",
             targets: ["subtitle"]),
@@ -14,9 +17,9 @@ let package = Package(
         .library(
             name: "srt",
             targets: ["srt"]),
-        .executable(
-            name: "convert",
-            targets: ["convert"]),
+        .library(
+            name: "vtt",
+            targets: ["vtt"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", from: "0.0.1"),
@@ -33,10 +36,13 @@ let package = Package(
             name: "srt",
             dependencies: ["subtitle"]),
         .target(
+            name: "vtt",
+            dependencies: ["subtitle"]),
+        .target(
             name: "convert",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
-                "Rainbow", "subtitle", "bcc", "srt"]),
+                "Rainbow", "subtitle", "bcc", "srt", "vtt"]),
         .testTarget(
             name: "subtitleTests",
             dependencies: ["subtitle"]),
