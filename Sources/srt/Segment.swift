@@ -62,7 +62,7 @@ extension SRT.Segment: CustomStringConvertible {
     ///
     /// - Parameter interval: non-negative time interval to format.
     /// - Returns: valid string timestamp.
-    private static func timestamp(from interval: TimeInterval) -> String {
+    public static func timestamp(from interval: TimeInterval) -> String {
         let (h, m, s, c) = subtitle.timestamp(from: interval)
         return String(format: "%02d:%02d:%02d,%03d", h, m, s, c)
     }
