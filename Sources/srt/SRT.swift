@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import subtitle
+@_exported import subtitle
 
 public struct SRT {
     internal var _segments = [Segment]()

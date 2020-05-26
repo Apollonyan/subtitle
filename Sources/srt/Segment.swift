@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import subtitle
 
 /// A segment of a .srt file.
 extension SRT {

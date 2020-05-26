@@ -10,7 +10,6 @@ import ArgumentParser
 import Foundation
 import Rainbow
 
-import subtitle
 import bcc
 import srt
 import vtt

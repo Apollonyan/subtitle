@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import subtitle
 
 extension VTT {
     public struct Segment: SubtitleSegment {

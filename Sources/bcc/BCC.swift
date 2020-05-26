@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import subtitle
+@_exported import subtitle
 
 public struct BCC: Codable {
     public private(set) var fontSize = 0.4

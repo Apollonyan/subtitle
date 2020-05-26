@@ -6,7 +6,7 @@
 //  Copyright © 2017-2020 ApolloZhu. MIT License.
 //
 
-import subtitle
+@_exported import subtitle
 import Foundation
 
 public struct VTT {
