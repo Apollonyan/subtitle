@@ -53,7 +53,7 @@ public struct BCC: Codable {
 
 extension BCC: Subtitle {
     public init(segments: [SubtitleSegment]) {
-        self.init(_segments: segments.map {
+        self.init(_segments: (segments as? [Segment]) ?? segments.map {
             BCC.Segment(
                 from: $0.startTime,
                 to: $0.endTime,

@@ -15,14 +15,16 @@ public struct SRT {
 
 extension SRT: Subtitle {
     public init(segments: [SubtitleSegment]) {
-        self.init(_segments: segments.enumerated().map { (index, segment) in
-            SRT.Segment(
-                index: index + 1,
-                from: segment.startTime,
-                to: segment.endTime,
-                contents: segment.contents
-            )
-        })
+        self.init(_segments: (segments as? [Segment])
+            ?? segments.enumerated().map { (index, segment) in
+                SRT.Segment(
+                    index: index + 1,
+                    from: segment.startTime,
+                    to: segment.endTime,
+                    contents: segment.contents
+                )
+            }
+        )
     }
 
     public var segments: [SubtitleSegment] {

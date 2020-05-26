@@ -20,16 +20,12 @@ extension VTT: Subtitle {
     }
 
     public init(segments: [SubtitleSegment]) {
-        if let _segments = segments as? [Segment] {
-            self._segments = _segments
-        } else {
-            self._segments = segments.map {
-                Segment(
-                    startTime: $0.startTime,
-                    endTime: $0.endTime,
-                    contents: $0.contents
-                )
-            }
+        self._segments = (segments as? [Segment]) ?? segments.map {
+            Segment(
+                startTime: $0.startTime,
+                endTime: $0.endTime,
+                contents: $0.contents
+            )
         }
         let tagger = NSLinguisticTagger(tagSchemes: [.language], options: 0)
         tagger.string = _segments.flatMap(\.contents).joined(separator: "\n")
