@@ -44,6 +44,8 @@ extension SRT: Subtitle {
 extension SRT: CustomStringConvertible {
     /// Convert back to what it would be like in a .srt file.
     public var description: String {
-        return _segments.map(\.description).joined(separator: "\n\n") + "\n"
+        return _segments
+            .map { $0.description }
+            .joined(separator: "\n\n") + "\n"
     }
 }

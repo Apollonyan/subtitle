@@ -28,7 +28,9 @@ extension VTT: Subtitle {
             )
         }
         let tagger = NSLinguisticTagger(tagSchemes: [.language], options: 0)
-        tagger.string = _segments.flatMap(\.contents).joined(separator: "\n")
+        tagger.string = _segments
+            .flatMap { $0.contents }
+            .joined(separator: "\n")
         if #available(macOS 10.13, *) {
             language = tagger.dominantLanguage ?? "en"
         } else {
@@ -53,7 +55,7 @@ extension VTT: CustomStringConvertible {
         Kind: captions
         Language: \(language)
 
-        \(_segments.map(\.description).joined(separator: "\n\n"))
+        \(_segments.map { $0.description }.joined(separator: "\n\n"))
 
         """
     }
