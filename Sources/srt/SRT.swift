@@ -37,7 +37,7 @@ extension SRT: Subtitle {
     }
 
     public func write(to url: URL) throws {
-        try description.write(to: url, atomically: true, encoding: .utf8)
+        try description.write(to: url, atomically: false, encoding: .utf8)
     }
 }
 
