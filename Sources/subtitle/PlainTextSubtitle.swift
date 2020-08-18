@@ -15,22 +15,14 @@ public protocol PlainTextSubtitle: Subtitle, CustomStringConvertible {
 extension PlainTextSubtitle {
     public init(data: Data) throws {
         guard let content = String(data: data, encoding: .utf8) else {
-            throw NSError(
-                domain: NSCocoaErrorDomain,
-                code: CocoaError.fileReadInapplicableStringEncoding.rawValue,
-                userInfo: nil
-            )
+            throw CocoaError(.fileReadInapplicableStringEncoding)
         }
         self.init(content: content)
     }
 
     public func asData() throws -> Data {
         guard let data = description.data(using: .utf8) else {
-            throw NSError(
-                domain: NSCocoaErrorDomain,
-                code: CocoaError.fileWriteInapplicableStringEncoding.rawValue,
-                userInfo: nil
-            )
+            throw CocoaError(.fileWriteInapplicableStringEncoding)
         }
         return data
     }
