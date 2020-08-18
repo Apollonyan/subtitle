@@ -22,8 +22,8 @@ extension VTT {
         self.init(segments: content.components(separatedBy: "\(lineSeparator)\(lineSeparator)").compactMap { part in
             let lines = part.components(separatedBy: lineSeparator)
             guard let rawTimestamps = lines.first?.components(separatedBy: " --> "),
-                rawTimestamps.count == 2
-                else { return nil }
+                  rawTimestamps.count == 2
+            else { return nil }
             let start = Self.timeInterval(from: rawTimestamps[0])
             let finish = Self.timeInterval(from: rawTimestamps[1])
             let contents = Array(lines[1...])

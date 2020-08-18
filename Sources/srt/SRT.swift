@@ -13,7 +13,7 @@ public struct SRT {
     internal var _segments = [Segment]()
 }
 
-extension SRT: Subtitle {
+extension SRT: PlainTextSubtitle {
     public init(segments: [SubtitleSegment]) {
         self.init(_segments: (segments as? [Segment])
             ?? segments.enumerated().map { (index, segment) in
@@ -29,15 +29,6 @@ extension SRT: Subtitle {
 
     public var segments: [SubtitleSegment] {
         return _segments
-    }
-
-    public init(url: URL) throws {
-        let content = try String(contentsOf: url)
-        self.init(content: content)
-    }
-
-    public func write(to url: URL) throws {
-        try description.write(to: url, atomically: false, encoding: .utf8)
     }
 }
 

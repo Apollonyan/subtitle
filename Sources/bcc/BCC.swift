@@ -66,19 +66,14 @@ extension BCC: Subtitle {
         return _segments
     }
 
-    /// Write the contents of self to a location in bcc format.
-    ///
-    /// - parameter url: The location to write the data into.
-    /// - parameter options: Options for writing the data. Default value is `[]`.
+    public init(data: Data) throws {
+        self = try JSONDecoder().decode(BCC.self, from: data)
+    }
+
     /// - throws: `EncodingError.invalidValue` if a non-conforming floating-point value is encountered during encoding, and the encoding strategy is `.throw`.
     /// - throws: An error if any value throws an error during encoding.
     /// - throws: An error in the Cocoa domain, if there is an error writing to the `URL`.
-    public func write(to url: URL) throws {
-        let data = try JSONEncoder().encode(self)
-        try data.write(to: url)
-    }
-
-    public init(url: URL) throws {
-        self = try JSONDecoder().decode(BCC.self, from: Data(contentsOf: url))
+    public func asData() throws -> Data {
+        return try JSONEncoder().encode(self)
     }
 }

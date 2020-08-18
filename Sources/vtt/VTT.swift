@@ -14,7 +14,7 @@ public struct VTT {
     internal let _segments: [Segment]
 }
 
-extension VTT: Subtitle {
+extension VTT: PlainTextSubtitle {
     public var segments: [SubtitleSegment] {
         return _segments
     }
@@ -37,15 +37,6 @@ extension VTT: Subtitle {
             language = "en"
         }
     }
-
-    public init(url: URL) throws {
-        self.init(content: try String(contentsOf: url))
-    }
-
-    public func write(to url: URL) throws {
-        try description.write(to: url, atomically: false, encoding: .utf8)
-    }
-
 }
 
 extension VTT: CustomStringConvertible {
